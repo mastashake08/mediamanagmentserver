@@ -10,7 +10,8 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class PushMediaEvent extends Event
 {
     use SerializesModels;
-
+    public $store;
+    public $file
     /**
      * Create a new event instance.
      *

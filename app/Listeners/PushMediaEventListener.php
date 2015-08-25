@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Listeners;
-
+use LRedis;
 use App\Events\PushMediaEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,5 +27,9 @@ class PushMediaEventListener
     public function handle(PushMediaEvent $event)
     {
         //
+
+        $redis = LRedis::connection();
+    		$redis->publish($event->store->websocket_channel,json_encode(['media_content' => $event->file->url]));
+        
     }
 }

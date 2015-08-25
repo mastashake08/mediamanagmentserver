@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Store;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //
+        //get all stores and return
+
     }
 
     /**
@@ -27,6 +28,8 @@ class StoreController extends Controller
     public function create()
     {
         //
+        return view('add-store');
+
     }
 
     /**
@@ -38,6 +41,14 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         //
+        $store = new Store;
+        $store->name = $request->name;
+        $store->ip_address = $request->ip();
+        $store->websocket_channel = str_random(40);
+        $store->save();
+        $stores = Store::all();
+        return view('all-stores')->with(['stores'=>$stores]);
+        //return redirect()->action('StoreController@index');
     }
 
     /**
@@ -83,5 +94,6 @@ class StoreController extends Controller
     public function destroy($id)
     {
         //
+        Store::find($id)->delete();
     }
 }
