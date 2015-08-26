@@ -16,8 +16,12 @@ Route::get('/', function () {
 
     return view('welcome');
 });
+Route::get('all-stores', 'StoreController@index');
 Route::get('add-store', 'StoreController@create');
 Route::post('add-store','StoreController@store');
 Route::post('add-file', 'FileController@store');
 Route::get('all-files','FileController@index');
 Route::get('delete-all-files','FileController@destroyAll');
+Route::get('delete-all-stores','StoreController@destroyAll');
+Route::get('delete-store/{id}','StoreController@destroy');
+Route::get('delete-file/{id}','FileController@destroy');

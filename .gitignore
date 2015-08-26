@@ -4,3 +4,6 @@ Homestead.yaml
 Homestead.json
 .env
 public/media/*
+resources/angular*
+resources/bootstrap*
+resources/jquery*

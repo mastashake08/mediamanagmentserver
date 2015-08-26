@@ -101,7 +101,8 @@ class FileController extends Controller
     {
         //
         File::find($id)->delete();
-        return true;
+        $files = File::all();
+        return view('files')->with(['files'=>$files]);
 
     }
 
@@ -112,5 +113,6 @@ class FileController extends Controller
       foreach($files as $file){
         $file->delete();
       }
+      return "true";
     }
 }

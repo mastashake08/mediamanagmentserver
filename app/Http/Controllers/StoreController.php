@@ -17,7 +17,8 @@ class StoreController extends Controller
     public function index()
     {
         //get all stores and return
-
+        $stores = Store::all();
+        return view('all-stores')->with(['stores'=>$stores]);
     }
 
     /**
@@ -46,9 +47,9 @@ class StoreController extends Controller
         $store->ip_address = $request->ip();
         $store->websocket_channel = str_random(40);
         $store->save();
-        $stores = Store::all();
-        return view('all-stores')->with(['stores'=>$stores]);
-        //return redirect()->action('StoreController@index');
+        //$stores = Store::all();
+        //return view('all-stores')->with(['stores'=>$stores]);
+        return redirect()->action('StoreController@index');
     }
 
     /**
@@ -95,5 +96,15 @@ class StoreController extends Controller
     {
         //
         Store::find($id)->delete();
+        return redirect()->action('StoreController@index');
     }
+    public function destroyAll() {
+
+      $stores = Store::all();
+      foreach($stores as $store){
+        $store->delete();
+      }
+      return "true";
+    }
+
 }
